@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bghvnig3lja5b"]
+
+[ext_resource type="Script" uid="uid://d2xq5n6ha4h0y" path="res://scenes/main.gd" id="1_0bbpv"]
+[ext_resource type="Texture2D" uid="uid://c0pfkert7jx6n" path="res://art/final/screen/screen.png" id="1_elqb8"]
+[ext_resource type="PackedScene" uid="uid://c4a3n1rx36jk5" path="res://scenes/apps/BusApp/BusApp.tscn" id="2_rvslj"]
+[ext_resource type="Texture2D" uid="uid://bth0nflt1jgqj" path="res://art/final/screen/bus.png" id="3_c01mt"]
+[ext_resource type="Texture2D" uid="uid://cx7ov55i8llwe" path="res://art/final/screen/bus_pressed.png" id="4_nxtc6"]
+[ext_resource type="Texture2D" uid="uid://dc5aev6122u2m" path="res://art/final/screen/bus_open.png" id="5_jlsqs"]
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(1280, 800)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bbpv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_elqb8")
+
+[node name="Taskbar" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 771.0
+offset_right = 1280.0
+offset_bottom = 800.0
+
+[node name="BusAppButton" type="TextureButton" parent="Taskbar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 107.0
+offset_right = 135.0
+offset_bottom = 28.0
+texture_normal = ExtResource("3_c01mt")
+texture_pressed = ExtResource("4_nxtc6")
+texture_disabled = ExtResource("5_jlsqs")
+
+[node name="BusApp" parent="." instance=ExtResource("2_rvslj")]

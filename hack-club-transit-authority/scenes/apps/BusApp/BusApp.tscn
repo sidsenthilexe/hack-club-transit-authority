@@ -1,0 +1,430 @@
+[gd_scene load_steps=18 format=3 uid="uid://c4a3n1rx36jk5"]
+
+[ext_resource type="Script" uid="uid://dvcahj4jinrd8" path="res://scenes/apps/BusApp/BusApp.gd" id="1_iwlkk"]
+[ext_resource type="Texture2D" uid="uid://c2hh8dtm3i6pl" path="res://art/final/app/template_large.png" id="2_7x3o7"]
+[ext_resource type="Texture2D" uid="uid://be2htoph6amu1" path="res://art/final/app/minimize_app_icon.png" id="2_mypwm"]
+[ext_resource type="Texture2D" uid="uid://ce1he10h40nkl" path="res://art/final/app/minimize_app_icon_pressed.png" id="3_iwlkk"]
+[ext_resource type="Texture2D" uid="uid://cctxd1pse5qln" path="res://art/final/app/close_app_icon.png" id="6_0v6om"]
+[ext_resource type="Texture2D" uid="uid://01j37rf5hvwa" path="res://art/final/app/close_app_icon_pressed.png" id="7_4ljtf"]
+[ext_resource type="Texture2D" uid="uid://hyl1oory7yhf" path="res://art/final/progressBars/enabled_bar_0.png" id="7_iwlkk"]
+[ext_resource type="FontVariation" uid="uid://dya7lwpc4idw6" path="res://fonts/Arial.tres" id="7_jag7j"]
+[ext_resource type="Texture2D" uid="uid://guc8lxi1c24y" path="res://art/final/progressBars/green/green_bar_10.png" id="8_gors1"]
+[ext_resource type="FontFile" uid="uid://dgpk4lpx2l5ej" path="res://fonts/ARIALI.TTF" id="8_qsm4b"]
+[ext_resource type="FontFile" uid="uid://e685exu6b67d" path="res://fonts/ARIALBI.TTF" id="9_wt5ib"]
+[ext_resource type="FontFile" uid="uid://cdkc8ambyxovp" path="res://fonts/ARIALBD.TTF" id="10_rvols"]
+[ext_resource type="FontVariation" uid="uid://lfgw3epox27w" path="res://fonts/ArialBold.tres" id="13_qsm4b"]
+[ext_resource type="FontVariation" uid="uid://b0srk77bngk3q" path="res://fonts/ArialItalic.tres" id="14_qsm4b"]
+[ext_resource type="Texture2D" uid="uid://cbr8nfkbgvado" path="res://art/final/buttons/green_button.png" id="15_rvols"]
+[ext_resource type="Texture2D" uid="uid://dj32k226kmian" path="res://art/final/buttons/green_button_pressed.png" id="16_5ouju"]
+[ext_resource type="Texture2D" uid="uid://cg83oxkm8cdtu" path="res://art/final/buttons/disabled_button.png" id="17_5ouju"]
+
+[node name="AppWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 770.0
+script = ExtResource("1_iwlkk")
+
+[node name="WindowBG" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_7x3o7")
+
+[node name="TitleBar" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 500.0
+offset_bottom = 30.0
+
+[node name="Min" type="TextureButton" parent="TitleBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1230.0
+offset_top = 5.0
+offset_right = 1250.0
+offset_bottom = 25.0
+texture_normal = ExtResource("2_mypwm")
+texture_pressed = ExtResource("3_iwlkk")
+
+[node name="Close" type="TextureButton" parent="TitleBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1255.0
+offset_top = 5.0
+offset_right = 1275.0
+offset_bottom = 25.0
+texture_normal = ExtResource("6_0v6om")
+texture_pressed = ExtResource("7_4ljtf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TitleBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 29.0
+offset_top = 3.0
+offset_right = 164.0
+offset_bottom = 26.0
+theme_override_fonts/normal_font = ExtResource("7_jag7j")
+theme_override_fonts/italics_font = ExtResource("8_qsm4b")
+theme_override_fonts/bold_italics_font = ExtResource("9_wt5ib")
+theme_override_fonts/bold_font = ExtResource("10_rvols")
+theme_override_font_sizes/normal_font_size = 22
+text = "Bus Manager"
+fit_content = true
+
+[node name="UpgradesArea" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 30.0
+offset_right = 412.0
+offset_bottom = 377.0
+scale = Vector2(2, 2)
+
+[node name="CapacityBar" type="TextureProgressBar" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 57.0
+offset_right = 320.0
+offset_bottom = 87.0
+max_value = 300.0
+texture_under = ExtResource("7_iwlkk")
+texture_progress = ExtResource("8_gors1")
+
+[node name="UpgradesTitle" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 181.0
+offset_bottom = 57.0
+theme_override_fonts/normal_font = ExtResource("7_jag7j")
+theme_override_fonts/bold_font = ExtResource("13_qsm4b")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]Upgrades"
+
+[node name="CapacityText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 85.0
+offset_right = 198.0
+offset_bottom = 113.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Articulated Buses"
+
+[node name="CapacityText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 194.0
+offset_top = 94.0
+offset_right = 372.0
+offset_bottom = 122.0
+theme_override_fonts/italics_font = ExtResource("14_qsm4b")
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "[i]Capacity"
+
+[node name="SpeedBar" type="TextureProgressBar" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 115.0
+offset_right = 319.0
+offset_bottom = 145.0
+max_value = 300.0
+texture_under = ExtResource("7_iwlkk")
+texture_progress = ExtResource("8_gors1")
+
+[node name="SpeedText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 143.0
+offset_right = 197.0
+offset_bottom = 171.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Upgraded Engines"
+
+[node name="SpeedText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 199.0
+offset_top = 152.0
+offset_right = 377.0
+offset_bottom = 180.0
+theme_override_fonts/italics_font = ExtResource("14_qsm4b")
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "[i]Speed"
+
+[node name="FrequencyBar" type="TextureProgressBar" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 173.0
+offset_right = 320.0
+offset_bottom = 203.0
+max_value = 300.0
+texture_under = ExtResource("7_iwlkk")
+texture_progress = ExtResource("8_gors1")
+
+[node name="FrequencyText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 201.0
+offset_right = 198.0
+offset_bottom = 229.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Optimized Routes"
+
+[node name="FrequencyText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 197.0
+offset_top = 210.0
+offset_right = 375.0
+offset_bottom = 238.0
+theme_override_fonts/italics_font = ExtResource("14_qsm4b")
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "[i]Frequency"
+
+[node name="ReliabilityBar" type="TextureProgressBar" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 231.0
+offset_right = 319.0
+offset_bottom = 261.0
+max_value = 300.0
+texture_under = ExtResource("7_iwlkk")
+texture_progress = ExtResource("8_gors1")
+
+[node name="ReliabilityText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 259.0
+offset_right = 262.0
+offset_bottom = 287.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Weatherproof Systems"
+
+[node name="ReliabilityText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 244.0
+offset_top = 268.0
+offset_right = 422.0
+offset_bottom = 296.0
+theme_override_fonts/italics_font = ExtResource("14_qsm4b")
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "[i]Reliability"
+
+[node name="EfficiencyBar" type="TextureProgressBar" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 289.0
+offset_right = 319.0
+offset_bottom = 319.0
+max_value = 300.0
+texture_under = ExtResource("7_iwlkk")
+texture_progress = ExtResource("8_gors1")
+
+[node name="EfficiencyText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 317.0
+offset_right = 197.0
+offset_bottom = 345.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Rapid Boarding"
+
+[node name="EfficiencyText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 172.0
+offset_top = 326.0
+offset_right = 350.0
+offset_bottom = 354.0
+theme_override_fonts/italics_font = ExtResource("14_qsm4b")
+theme_override_font_sizes/italics_font_size = 14
+bbcode_enabled = true
+text = "[i]Efficiency"
+
+[node name="CapacityButton" type="TextureButton" parent="UpgradesArea"]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 57.0
+offset_right = 400.0
+offset_bottom = 87.0
+texture_normal = ExtResource("15_rvols")
+texture_pressed = ExtResource("16_5ouju")
+
+[node name="SpeedButton" type="TextureButton" parent="UpgradesArea"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 115.0
+offset_right = 399.0
+offset_bottom = 145.0
+texture_normal = ExtResource("15_rvols")
+texture_pressed = ExtResource("16_5ouju")
+texture_disabled = ExtResource("17_5ouju")
+
+[node name="FrequencyButton" type="TextureButton" parent="UpgradesArea"]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 173.0
+offset_right = 400.0
+offset_bottom = 203.0
+texture_normal = ExtResource("15_rvols")
+texture_pressed = ExtResource("16_5ouju")
+texture_disabled = ExtResource("17_5ouju")
+
+[node name="ReliabilityButton" type="TextureButton" parent="UpgradesArea"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 231.0
+offset_right = 399.0
+offset_bottom = 261.0
+texture_normal = ExtResource("15_rvols")
+texture_pressed = ExtResource("16_5ouju")
+texture_disabled = ExtResource("17_5ouju")
+
+[node name="EfficiencyButton" type="TextureButton" parent="UpgradesArea"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 289.0
+offset_right = 399.0
+offset_bottom = 319.0
+texture_normal = ExtResource("15_rvols")
+texture_pressed = ExtResource("16_5ouju")
+texture_disabled = ExtResource("17_5ouju")
+
+[node name="CapacityButtonText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 329.0
+offset_top = 59.0
+offset_right = 398.0
+offset_bottom = 85.0
+theme_override_font_sizes/normal_font_size = 16
+text = "Upgrade"
+
+[node name="CapacityPriceText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 331.0
+offset_top = 89.0
+offset_right = 400.0
+offset_bottom = 115.0
+theme_override_font_sizes/normal_font_size = 16
+text = "$100"
+
+[node name="SpeedPriceText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 330.0
+offset_top = 147.0
+offset_right = 399.0
+offset_bottom = 173.0
+theme_override_font_sizes/normal_font_size = 16
+text = "$100"
+
+[node name="FrequencyPriceText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 331.0
+offset_top = 205.0
+offset_right = 400.0
+offset_bottom = 231.0
+theme_override_font_sizes/normal_font_size = 16
+text = "$100"
+
+[node name="ReliabilityPriceText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 330.0
+offset_top = 263.0
+offset_right = 399.0
+offset_bottom = 289.0
+theme_override_font_sizes/normal_font_size = 16
+text = "$100"
+
+[node name="EfficiencyPriceText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 330.0
+offset_top = 321.0
+offset_right = 399.0
+offset_bottom = 347.0
+theme_override_font_sizes/normal_font_size = 16
+text = "$100"
+
+[node name="SpeedButtonText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 329.0
+offset_top = 117.0
+offset_right = 398.0
+offset_bottom = 143.0
+theme_override_font_sizes/normal_font_size = 16
+text = "Upgrade"
+
+[node name="FrequencyButtonText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 329.0
+offset_top = 175.0
+offset_right = 398.0
+offset_bottom = 201.0
+theme_override_font_sizes/normal_font_size = 16
+text = "Upgrade"
+
+[node name="ReliabilityButtonText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 328.0
+offset_top = 233.0
+offset_right = 397.0
+offset_bottom = 259.0
+theme_override_font_sizes/normal_font_size = 16
+text = "Upgrade"
+
+[node name="ReliabilityButtonText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 328.0
+offset_top = 291.0
+offset_right = 397.0
+offset_bottom = 317.0
+theme_override_font_sizes/normal_font_size = 16
+text = "Upgrade"
+
+[node name="StatsArea" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 815.0
+offset_top = 30.0
+offset_right = 1273.0
+offset_bottom = 763.0
+
+[node name="StatsTitle" type="RichTextLabel" parent="StatsArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 19.0
+offset_right = 320.0
+offset_bottom = 106.0
+theme_override_fonts/normal_font = ExtResource("7_jag7j")
+theme_override_fonts/bold_font = ExtResource("13_qsm4b")
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]Status"

@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://beldvx5jmxy0"]
+
+[ext_resource type="FontFile" uid="uid://cdkc8ambyxovp" path="res://fonts/ARIALBD.TTF" id="1_tm2ng"]
+
+[resource]
+base_font = ExtResource("1_tm2ng")
