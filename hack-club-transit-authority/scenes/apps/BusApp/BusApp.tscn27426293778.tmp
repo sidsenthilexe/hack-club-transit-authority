@@ -15,7 +15,7 @@
 [ext_resource type="FontVariation" uid="uid://lfgw3epox27w" path="res://fonts/ArialBold.tres" id="13_qsm4b"]
 [ext_resource type="Script" uid="uid://cq1fdvghaoum2" path="res://scenes/apps/BusApp/CapacityBar.gd" id="13_sj3uf"]
 [ext_resource type="FontVariation" uid="uid://b0srk77bngk3q" path="res://fonts/ArialItalic.tres" id="14_qsm4b"]
-[ext_resource type="Texture2D" uid="uid://cbr8nfkbgvado" path="res://art/final/app/green_button.png" id="15_rvols"]
+[ext_resource type="Texture2D" uid="uid://cbr8nfkbgvado" path="res://art/final/buttons/green_button.png" id="15_rvols"]
 [ext_resource type="Texture2D" uid="uid://dj32k226kmian" path="res://art/final/buttons/green_button_pressed.png" id="16_5ouju"]
 [ext_resource type="Script" uid="uid://0s5b50bftyp8" path="res://scenes/apps/BusApp/SpeedBar.gd" id="16_pcmts"]
 [ext_resource type="Script" uid="uid://ddah1ihbe3y0i" path="res://scenes/apps/BusApp/FrequencyBar.gd" id="17_3cj1y"]
@@ -119,13 +119,23 @@ theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
 text = "[b]Upgrades"
 
+[node name="CapacityText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 85.0
+offset_right = 198.0
+offset_bottom = 113.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Articulated Buses"
+
 [node name="CapacityText2" type="RichTextLabel" parent="UpgradesArea"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 21.5
-offset_top = 89.5
-offset_right = 161.5
-offset_bottom = 117.5
+offset_left = 194.0
+offset_top = 94.0
+offset_right = 372.0
+offset_bottom = 122.0
 theme_override_fonts/italics_font = ExtResource("14_qsm4b")
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
@@ -143,13 +153,23 @@ texture_under = ExtResource("7_iwlkk")
 texture_progress = ExtResource("8_gors1")
 script = ExtResource("16_pcmts")
 
-[node name="SpeedText2" type="RichTextLabel" parent="UpgradesArea"]
+[node name="SpeedText" type="RichTextLabel" parent="UpgradesArea"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 19.0
-offset_top = 147.5
+offset_top = 143.0
 offset_right = 197.0
-offset_bottom = 175.5
+offset_bottom = 171.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Upgraded Engines"
+
+[node name="SpeedText2" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 199.0
+offset_top = 152.0
+offset_right = 377.0
+offset_bottom = 180.0
 theme_override_fonts/italics_font = ExtResource("14_qsm4b")
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
@@ -167,13 +187,23 @@ texture_under = ExtResource("7_iwlkk")
 texture_progress = ExtResource("8_gors1")
 script = ExtResource("17_3cj1y")
 
+[node name="FrequencyText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 20.0
+offset_top = 201.0
+offset_right = 198.0
+offset_bottom = 229.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Optimized Routes"
+
 [node name="FrequencyText2" type="RichTextLabel" parent="UpgradesArea"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 22.5
-offset_top = 205.5
-offset_right = 200.5
-offset_bottom = 233.5
+offset_left = 197.0
+offset_top = 210.0
+offset_right = 375.0
+offset_bottom = 238.0
 theme_override_fonts/italics_font = ExtResource("14_qsm4b")
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
@@ -191,13 +221,23 @@ texture_under = ExtResource("7_iwlkk")
 texture_progress = ExtResource("8_gors1")
 script = ExtResource("18_y0irg")
 
+[node name="ReliabilityText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 259.0
+offset_right = 262.0
+offset_bottom = 287.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Weatherproof Systems"
+
 [node name="ReliabilityText2" type="RichTextLabel" parent="UpgradesArea"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 21.5
-offset_top = 263.5
-offset_right = 199.5
-offset_bottom = 291.5
+offset_left = 244.0
+offset_top = 268.0
+offset_right = 422.0
+offset_bottom = 296.0
 theme_override_fonts/italics_font = ExtResource("14_qsm4b")
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
@@ -215,13 +255,23 @@ texture_under = ExtResource("7_iwlkk")
 texture_progress = ExtResource("8_gors1")
 script = ExtResource("19_84lo2")
 
+[node name="EfficiencyText" type="RichTextLabel" parent="UpgradesArea"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 317.0
+offset_right = 197.0
+offset_bottom = 345.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Rapid Boarding"
+
 [node name="EfficiencyText2" type="RichTextLabel" parent="UpgradesArea"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 21.5
-offset_top = 321.5
-offset_right = 199.5
-offset_bottom = 349.5
+offset_left = 172.0
+offset_top = 326.0
+offset_right = 350.0
+offset_bottom = 354.0
 theme_override_fonts/italics_font = ExtResource("14_qsm4b")
 theme_override_font_sizes/italics_font_size = 14
 bbcode_enabled = true
@@ -235,7 +285,6 @@ offset_right = 400.0
 offset_bottom = 87.0
 texture_normal = ExtResource("15_rvols")
 texture_pressed = ExtResource("16_5ouju")
-texture_disabled = ExtResource("17_5ouju")
 
 [node name="SpeedButton" type="TextureButton" parent="UpgradesArea"]
 layout_mode = 0
@@ -388,6 +437,7 @@ offset_left = 324.5
 offset_top = 13.5
 offset_right = 364.5
 offset_bottom = 53.5
+scale = Vector2(1, 1)
 texture = ExtResource("22_qjt4j")
 
 [node name="AvailableMoneyTitle" type="RichTextLabel" parent="UpgradesArea"]
