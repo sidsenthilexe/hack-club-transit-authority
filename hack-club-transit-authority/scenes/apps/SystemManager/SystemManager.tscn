@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3xu8gmxh077c"]
+[gd_scene load_steps=16 format=3 uid="uid://c3xu8gmxh077c"]
 
 [ext_resource type="Texture2D" uid="uid://7oj7bsubvyrl" path="res://art/final/app/template_small.png" id="1_nd3ey"]
 [ext_resource type="Script" uid="uid://udcnnxycsiji" path="res://scenes/apps/SystemManager/SystemManager.gd" id="1_yk383"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://01j37rf5hvwa" path="res://art/final/app/close_app_icon_pressed.png" id="5_4iqcs"]
 [ext_resource type="Texture2D" uid="uid://dj32k226kmian" path="res://art/final/buttons/green_button_pressed.png" id="5_yk383"]
 [ext_resource type="FontVariation" uid="uid://dya7lwpc4idw6" path="res://fonts/Arial.tres" id="6_ar5yb"]
+[ext_resource type="Texture2D" uid="uid://cg83oxkm8cdtu" path="res://art/final/buttons/disabled_button.png" id="7_6bjof"]
 [ext_resource type="FontFile" uid="uid://dgpk4lpx2l5ej" path="res://fonts/ARIALI.TTF" id="7_yk383"]
 [ext_resource type="FontFile" uid="uid://e685exu6b67d" path="res://fonts/ARIALBI.TTF" id="8_6bjof"]
 [ext_resource type="FontFile" uid="uid://cdkc8ambyxovp" path="res://fonts/ARIALBD.TTF" id="9_prnf6"]
@@ -49,6 +50,7 @@ offset_bottom = 79.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("4_ar5yb")
 texture_pressed = ExtResource("5_yk383")
+texture_disabled = ExtResource("7_6bjof")
 
 [node name="GeneratePowerText" type="RichTextLabel" parent="."]
 texture_filter = 1

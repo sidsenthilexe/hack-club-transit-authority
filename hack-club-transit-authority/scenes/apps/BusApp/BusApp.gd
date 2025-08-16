@@ -1,176 +1,140 @@
 extends Control
 
-signal state_changed
+signal stateChanged
 
-@onready var capacity: int
-@onready var speed: int
-@onready var frequency: int
-@onready var reliability: int
-@onready var efficiency: int
+var capacity := 0
+var speed := 0
+var frequency := 0
+var reliability := 0
+var efficiency := 0
 
-@onready var capacityPrice: int
-@onready var speedPrice: int
-@onready var frequencyPrice: int
-@onready var reliabilityPrice: int
-@onready var efficiencyPrice: int
+var capacityPrice := 50
+var speedPrice := 50
+var frequencyPrice := 50
+var reliabilityPrice := 50
+var efficiencyPrice := 50
 
-@onready var level: int
-
-@onready var powerGenerated: int
-@onready var powerRequired: int
-@onready var moneyGenerated: int
+var level:= 0
+var powerGenerated := 0
+var powerRequired := 0
+var moneyGenerated := 0
+var totalMoney := 0
 
 func _ready():
 	$TitleBar/Close.pressed.connect(_on_close_pressed)
 	$TitleBar/Min.pressed.connect(_on_min_pressed)
-	
-	$UpgradesArea/CapacityButton.pressed.connect(_on_capacity_upgrade)
-	capacity = 0
-	$UpgradesArea/SpeedButton.pressed.connect(_on_speed_upgrade)
-	speed = 0
-	$UpgradesArea/FrequencyButton.pressed.connect(_on_frequency_upgrade)
-	frequency = 0
-	$UpgradesArea/ReliabilityButton.pressed.connect(_on_reliability_upgrade)
-	reliability = 0
-	$UpgradesArea/EfficiencyButton.pressed.connect(_on_efficiency_upgrade)
-	efficiency = 0
-	
-	capacityPrice = 0
-	$UpgradesArea/CapacityPriceText.text = (str(capacityPrice))
-	speedPrice = 0
-	$UpgradesArea/SpeedPriceText.text = (str(speedPrice))
-	frequencyPrice = 0
-	$UpgradesArea/FrequencyPriceText.text = (str(frequencyPrice))
-	reliabilityPrice = 0
-	$UpgradesArea/ReliabilityPriceText.text = (str(reliabilityPrice))
-	efficiencyPrice = 0
-	$UpgradesArea/ReliabilityPriceText.text = (str(reliabilityPrice))
-	
-	level = 0
-	powerGenerated = 0
-	powerRequired = 0
-	moneyGenerated = 0
-	
-	_each_turn(0)
+	$UpgradesArea/CapacityButton.pressed.connect(func(): _on_upgrade("capacity"))
+	$UpgradesArea/SpeedButton.pressed.connect(func(): _on_upgrade("speed"))
+	$UpgradesArea/FrequencyButton.pressed.connect(func(): _on_upgrade("frequency"))
+	$UpgradesArea/ReliabilityButton.pressed.connect(func(): _on_upgrade("reliability"))
+	$UpgradesArea/EfficiencyButton.pressed.connect(func(): _on_upgrade("efficiency"))
+	_update_all()
 
-func _process(delta):
-	_each_turn(0)
-
-func _each_turn(moneyNow):
-	powerGenerated = 100 + (level * 20)
-	powerRequired = 50 + (level * 25)
+func _on_upgrade(upgrade: String):
+	var price = _get_price(upgrade)
 	
-	var baseMoney = max(0, (level-2) * 15)
-	var bonusMoney = max(0, powerGenerated - powerRequired) *2
+	if totalMoney >= price:
+		totalMoney -= price
+		match upgrade:
+			"capacity": capacity += 1
+			"speed": speed += 1
+			"frequency": frequency += 1
+			"reliability": reliability += 1
+			"efficiency": efficiency += 1
+		_update_all()
+
+func _get_price(upgrade: String) -> int:
+	match upgrade:
+		"capacity": return capacityPrice
+		"speed": return speedPrice
+		"frequency": return frequencyPrice
+		"reliability": return reliabilityPrice
+		"efficiency": return efficiencyPrice
+		
+	return 999999
+
+func update_power(power:int):
+	powerGenerated = power
+	powerRequired = 50 + (level * 15)
+	var baseMoney = max(0, (level) * 15)
+	var bonusMoney = max(0, powerGenerated - powerRequired) * 2
 	moneyGenerated = baseMoney + bonusMoney
-	
+
+func _update_all():
 	_determine_level()
-	_upgrade_availability_bg(moneyNow)
+	_update_prices()
+	_update_progressbars()
+	_update_text()
+	_update_button_states()
 	
-	$StatsArea/LevelBar._update_level(level)
-	$StatsArea/PwrGeneratedNumber.text = (str(powerGenerated))
-	$StatsArea/PwrReqdNumber.text = (str(powerRequired))
-	$StatsArea/MoneyGeneratedNumber.text = (str(moneyGenerated))
+func _determine_level() -> int:
+	return min(capacity, speed, frequency, reliability, efficiency)
 	
-	$UpgradesArea/AvailableMoneyText.text = (str(moneyNow))
+func _update_prices():
+	capacityPrice = 50 + capacity * 50
+	speedPrice = 50 + speed * 50
+	frequencyPrice = 50 + frequency * 50
+	reliabilityPrice = 50 + reliability * 50
+	efficiencyPrice = 50 + efficiency * 50
 	
+func _update_stats(clicked: int):
+	powerGenerated += clicked
+	powerRequired = 50 + (level * 15)
+	
+	if (powerGenerated >= powerRequired):
+		var baseMoney = max(0, (level-2) * 15)
+		var bonusMoney = max(0, powerGenerated-powerRequired) *2
+		moneyGenerated = baseMoney + bonusMoney
+		totalMoney += moneyGenerated
+		if powerGenerated < 0:
+			powerGenerated = 0
+			
+	_update_text()
+	_update_button_states()
+	powerRequired = 50 + (level * 50)
+	_update_text()
+	_update_button_states()
+
+func _reset_turn():
+	powerGenerated = 0
+	powerRequired = 50 + (level * 15)
+	moneyGenerated = 0
+	_update_text()
+
+func _update_progressbars():
 	$UpgradesArea/CapacityBar._update_capacity(capacity)
 	$UpgradesArea/SpeedBar._update_speed(speed)
 	$UpgradesArea/FrequencyBar._update_frequency(frequency)
 	$UpgradesArea/ReliabilityBar._update_reliability(reliability)
 	$UpgradesArea/EfficiencyBar._update_efficiency(efficiency)
+	$StatsArea/LevelBar._update_level(_determine_level())
 	
-	capacityPrice = 50 + (capacity * 50)
-	speedPrice = 50 + (speed * 50)
-	frequencyPrice = 50 + (frequency * 50)
-	reliabilityPrice = 50 + (reliability * 50)
-	efficiencyPrice = 50 + (efficiency * 50)
-	$UpgradesArea/CapacityPriceText.text = (str(capacityPrice))
-	$UpgradesArea/SpeedPriceText.text = (str(speedPrice))
-	$UpgradesArea/FrequencyPriceText.text = (str(frequencyPrice))
-	$UpgradesArea/ReliabilityPriceText.text = (str(reliabilityPrice))
-	$UpgradesArea/EfficiencyPriceText.text = (str(efficiencyPrice))
+func _update_text():
+	$UpgradesArea/CapacityPriceText.text = str(capacityPrice)
+	$UpgradesArea/SpeedPriceText.text = str(speedPrice)
+	$UpgradesArea/FrequencyPriceText.text = str(frequencyPrice)
+	$UpgradesArea/ReliabilityPriceText.text = str(reliabilityPrice)
+	$UpgradesArea/EfficiencyPriceText.text = str(efficiencyPrice)
+	$UpgradesArea/AvailableMoneyText.text = str(totalMoney)
+	$StatsArea/PwrGeneratedNumber.text = str(powerGenerated)
+	$StatsArea/PwrReqdNumber.text = str(powerRequired)
+	$StatsArea/MoneyGeneratedNumber.text = str(moneyGenerated)
 	
-
-func _on_capacity_upgrade(moneyNow):
-	if (moneyNow >= capacityPrice):
-		moneyNow -= capacityPrice
-		capacity += 1
-	
-func _on_speed_upgrade(moneyNow):
-	if (moneyNow >= speedPrice):
-		moneyNow -= speedPrice
-		speed += 1
-	
-func _on_frequency_upgrade(moneyNow):
-	if (moneyNow >= frequencyPrice):
-		moneyNow -= frequencyPrice
-		frequency += 1
-	
-func _on_reliability_upgrade(moneyNow):
-	if (moneyNow >= reliabilityPrice):
-		moneyNow -= reliabilityPrice
-		frequency += 1
-	
-func _on_efficiency_upgrade(moneyNow):
-	if (moneyNow >= efficiencyPrice):
-		moneyNow -= efficiencyPrice
-		frequency += 1
-	
-func _upgrade_availability_bg(moneyNow) :
-	if (moneyNow < capacityPrice):
-		$UpgradesArea/CapacityButton.disabled = true
-	elif (capacity >= 10):
-		$UpgradesArea/CapacityButton.disabled = true
-	else:
-		$UpgradesArea/CapacityButton.disabled = false
-	
-	if (moneyNow < speedPrice):
-		$UpgradesArea/SpeedButton.disabled = true
-	elif (speed >= 10):
-		$UpgradesArea/SpeedButton.disabled = true
-	else:
-		$UpgradesArea/SpeedButton.disabled = false
-	
-	if (moneyNow < frequencyPrice):
-		$UpgradesArea/FrequencyButton.disabled = true
-	elif (frequency >= 10):
-		$UpgradesArea/FrequencyButton.disabled = true
-	else:
-		$UpgradesArea/FrequencyButton.disabled = false
-		
-	if (moneyNow < reliabilityPrice):
-		$UpgradesArea/ReliabilityButton.disabled = true
-	elif (reliability >= 10):
-		$UpgradesArea/ReliabilityButton.disabled = true
-	else:
-		$UpgradesArea/ReliabilityButton.disabled = false
-	
-	if (moneyNow < efficiencyPrice):
-		$UpgradesArea/EfficiencyButton.disabled = true
-	elif (efficiency >= 10):
-		$UpgradesArea/EfficiencyButton.disabled = true
-	else:
-		$UpgradesArea/EfficiencyButton.disabled = false
-	
-func _determine_level():
-	var targetLevel = level + 1
-	if min(capacity, speed, frequency, reliability, efficiency) >= targetLevel:
-		level = targetLevel
-	if (level > 10):
-		level = 10
-	if (level < 0):
-		level = 0
-	
+func _update_button_states():
+	$UpgradesArea/CapacityButton.disabled = totalMoney < capacityPrice or capacity >= 10
+	$UpgradesArea/SpeedButton.disabled = totalMoney < speedPrice or speed >= 10
+	$UpgradesArea/FrequencyButton.disabled = totalMoney < frequencyPrice or frequency >= 10
+	$UpgradesArea/ReliabilityButton.disabled = totalMoney < reliabilityPrice or reliability >= 10
+	$UpgradesArea/EfficiencyButton.disabled = totalMoney < efficiencyPrice or efficiency >= 10
 	
 func _on_close_pressed():
 	hide()
-	emit_signal("state_changed")
-	
+	emit_signal("stateChanged")
+
 func _on_min_pressed():
 	hide()
-	emit_signal("state_changed")
+	emit_signal("stateChanged")
 	
 func _taskbar_button_pressed():
 	show()
-	emit_signal("state_changed")
+	emit_signal("stateChanged")
